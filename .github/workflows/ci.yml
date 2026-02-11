@@ -34,13 +34,8 @@ jobs:
         with:
           php_version: ${{ env.PHP_VERSION }}
 
-  commit_trunk_build:
-    name: Commit build hash to built branch (only runs on push to trunk)
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/trunk' }}
-    needs: [build_and_test]
-    steps:
-      - name: Replace .gitignore with .deployignore
+      - name: Replace .gitignore with .deployignore (only trunk branch)
+        if: ${{ github.ref == 'refs/heads/trunk' }}
         shell: bash
         run: |
           if [ -f .deployignore ]; then
@@ -49,7 +44,8 @@ jobs:
             echo "No .deployignore file found, skipping replacement."
           fi
 
-      - name: commit to built branch
+      - name: commit built trunk branch
+        if: ${{ github.ref == 'refs/heads/trunk' }}
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -57,16 +53,15 @@ jobs:
           git add -A
           git commit -m "Deploy assets for ${{ inputs.php_version }}"
           git push origin HEAD:${{ inputs.branch }}-built --force
-
+          
   deploy_to_production:
     name: Deploy repo (only runs if 'deploy_to_production' is selected in workflow dispatch)
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.job_to_run == 'deploy_to_production' && github.event.inputs.branch == 'trunk' }}
+    if: ${{ github.event.inputs.job_to_run == 'deploy_to_production' && github.event.inputs.branch == 'trunk-built' }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: trunk-built
 
       - name: Run deploy script
         shell: bash
