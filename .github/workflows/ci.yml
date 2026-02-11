@@ -4,6 +4,16 @@ on:
   push:
     branches: [ trunk ]
   workflow_dispatch:
+    inputs:
+      job_to_run:
+        description: 'Select the job to run'
+        required: true
+        options:
+          - deploy_repo
+      branch:
+        description: 'Branch to deploy to (only applicable if "deploy_repo" is selected)'
+        required: false
+        default: 'trunk'
 
 jobs:
   prepare_repo:
