@@ -5,20 +5,6 @@ on:
     branches-ignore:
       - "**-built"
       - "**-built-**"
-  workflow_dispatch:
-    inputs:
-      job_to_run:
-        description: 'Select the job to run'
-        required: true
-        type: choice
-        options:
-          - deploy_to_production
-      branch:
-        description: 'Select the branch to deploy'
-        required: true
-        type: choice
-        options:
-          - trunk
 
 jobs:
   build_and_test:
@@ -53,18 +39,3 @@ jobs:
           git add -A
           git commit -m "Deploy assets for ${{ inputs.php_version }}"
           git push origin HEAD:$trunk-built --force
-          
-  deploy_to_production:
-    name: Deploy repo (only runs if 'deploy_to_production' is selected in workflow dispatch)
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.job_to_run == 'deploy_to_production' && github.event.inputs.branch == 'trunk-built' }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run deploy script
-        shell: bash
-        run: |
-          echo "Deploying to production..."
-          # Add your deployment commands here, e.g.:
