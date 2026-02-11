@@ -1,0 +1,41 @@
+name: Prepare repository (Composer, MU plugins, build hash)
+description: Sets up PHP/Composer, configures auth, installs dependencies, fetches VIP MU plugins, writes build hash
+
+inputs:
+  php_version:
+    description: PHP version to install
+    required: false
+    default: '8.4'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php_version }}
+        coverage: none
+        tools: composer
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Composer dependencies
+      shell: bash
+      run: composer install --prefer-dist --no-progress --no-interaction
+
+    - name: npm build 
+      working-directory: ${{ inputs.project_path }}
+      shell: bash
+      run: npm run build
+
+    - name: commit to built branch
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add -A
+        git commit -m "Build assets for ${{ inputs.php_version }}"
+        git push origin HEAD:built --force

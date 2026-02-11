@@ -1,0 +1,27 @@
+name: CI (Build and Deploy)
+
+on:
+  push:
+    branches: [ trunk ]
+  workflow_dispatch:
+
+jobs:
+  prepare_repo:
+    name: Prepare repo (once)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare the repo
+        uses: ./.github/actions/prepare
+        with:
+          php_version: ${{ env.PHP_VERSION }}
+
+      - name: Upload prepared artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepared-repo
+          include-hidden-files: true
+          path: .prepared-bundle/*.tgz
