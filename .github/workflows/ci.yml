@@ -1,4 +1,4 @@
-name: CI (Build and Deploy)
+name: Build and test repository (runs on every push)
 
 on:
   push:

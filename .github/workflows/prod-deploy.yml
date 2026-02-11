@@ -1,4 +1,4 @@
-name: CI (Build and Deploy)
+name: Deploy to production (manual trigger)
 
 on:
   workflow_dispatch:
