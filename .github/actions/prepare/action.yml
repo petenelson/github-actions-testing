@@ -1,5 +1,5 @@
-name: Prepare repository (Composer, MU plugins, build hash)
-description: Sets up PHP/Composer, configures auth, installs dependencies, fetches VIP MU plugins, writes build hash
+name: Prepare repository (Composer, node, tests, build hash)
+description: Prepare repository (Composer, node, tests, build hash)
 
 inputs:
   php_version:
@@ -30,3 +30,10 @@ runs:
       working-directory: ${{ inputs.project_path }}
       shell: bash
       run: npm run build
+
+    - name: Write build hash file to build-hash.txt
+      shell: bash
+      run: |
+        BUILD_HASH=$(git rev-parse --short HEAD)
+        echo "Build hash: $BUILD_HASH"
+        echo "$BUILD_HASH" > build-hash.txt
