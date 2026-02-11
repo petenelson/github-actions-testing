@@ -26,9 +26,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: List directory contents for debugging
+        shell: bash
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Contents:"
+          ls -la
+
       - name: Run deploy script
         shell: bash
         run: |
           echo "Deploying to production..."
           # Add your deployment commands here, e.g.:
-
