@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1b82a17ffeb9f83d665917ca21b583e",
-    "packages": [],
+    "content-hash": "fd4c6ac52e7bc57a8801800c16e70c07",
+    "packages": [
+        {
+            "name": "petenelson/progress-estimator",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/petenelson/progress-estimator.git",
+                "reference": "b986c6a89101c3f5d1ea6372a971c2e0fe4d5c99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/petenelson/progress-estimator/zipball/b986c6a89101c3f5d1ea6372a971c2e0fe4d5c99",
+                "reference": "b986c6a89101c3f5d1ea6372a971c2e0fe4d5c99",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7",
+                "squizlabs/php_codesniffer": "^3.0@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPEstimator\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pete Nelson",
+                    "email": "pete@petenelson.com"
+                }
+            ],
+            "description": "PHP class to estimate time remaining for a list of tasks",
+            "support": {
+                "issues": "https://github.com/petenelson/progress-estimator/issues",
+                "source": "https://github.com/petenelson/progress-estimator/tree/1.0.1"
+            },
+            "time": "2025-01-08T16:38:25+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",

@@ -26,5 +26,8 @@
 		"allow-plugins": {
 			"composer/installers": true
 		}
+	},
+	"require": {
+		"petenelson/progress-estimator": "^1.0"
 	}
 }
