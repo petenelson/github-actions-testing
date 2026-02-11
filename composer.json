@@ -1,0 +1,33 @@
+{
+	"name": "pete/github-actions-testing",
+	"version": "1.0.0",
+	"autoload": {
+		"psr-4": {
+			"Pete\\GithubActionsTesting\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Pete Nelson",
+			"email": "pete@petenelson.com"
+		}
+	],
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org",
+			"only": [
+				"wpackagist-plugin/*",
+				"wpackagist-theme/*"
+			]
+		}
+	],
+	"require": {
+		"wpackagist-plugin/simple-local-avatars": "^2.8"
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
+}
