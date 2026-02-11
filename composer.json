@@ -22,9 +22,6 @@
 			]
 		}
 	],
-	"require": {
-		"wpackagist-plugin/simple-local-avatars": "^2.8"
-	},
 	"config": {
 		"allow-plugins": {
 			"composer/installers": true
